@@ -92,9 +92,7 @@
             <if test="createDate != null">
                 #{createDate,jdbcType=TIMESTAMP},
             </if>
-            <if test="createPerson != null">
-                #{createPerson,jdbcType=VARCHAR},
-            </if>
+
             <if test="deleteFlag != null">
                 #{deleteFlag,jdbcType=CHAR},
             </if>
