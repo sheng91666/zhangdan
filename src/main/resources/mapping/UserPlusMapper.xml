@@ -9,7 +9,6 @@
         <result column="pass_word" property="passWord" jdbcType="VARCHAR" />
         <result column="email" property="email" jdbcType="VARCHAR" />
         <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
-        <result column="create_person" property="createPerson" jdbcType="VARCHAR" />
         <result column="delete_flag" property="deleteFlag" jdbcType="CHAR" />
     </resultMap>
 
