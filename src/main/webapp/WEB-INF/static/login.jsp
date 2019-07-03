@@ -23,7 +23,7 @@
 
         body {
             height: 100%;
-            background: #fff url(resource/images/backgroud.png) 50% 50% no-repeat;
+            background: #fff url(resource/images/jump.png) 50% 50% no-repeat;
             background-size: cover;
         }
 
