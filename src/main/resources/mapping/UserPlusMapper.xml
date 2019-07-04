@@ -17,7 +17,8 @@
             u.user_code AS 'userCode',
             u.pass_word AS 'passWord',
             u.email AS 'email',
-            u.phone AS 'phone'
+            u.phone AS 'phone',
+            u.role as 'role'
         FROM
             t_user u
         WHERE

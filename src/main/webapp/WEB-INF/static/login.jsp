@@ -54,7 +54,7 @@
         }
 
         .form-item input {
-            width: 288px;
+            width: 360px;
             height: 48px;
             padding-left: 70px;
             border: 1px solid #fff;
@@ -169,9 +169,10 @@
             }
         }
 
-        .opacity1{
-            opacity:1;
+        .opacity1 {
+            opacity: 1;
         }
+
         .clear {
             zoom: 1;
         }
@@ -181,24 +182,27 @@
 
 <div class="dowebok">
     <div class="logo"></div>
-    <div class="form-item">
-        <input id="username" type="text" autocomplete="off" placeholder="账号">
-        <p class="tip"></p>
-    </div>
-    <div class="form-item">
-        <input id="password" type="password" autocomplete="off" placeholder="登录密码">
-        <%--<p class="tip">用户名或密码不正确</p>--%>
-    </div>
-    <div class="form-item">
-        <button id="submit">登 录</button>
-    </div>
+
+    <form action="/login-process" method="post" class="form-item">
+        <div class="form-item">
+            <input id="username" type="text" name="username" autocomplete="off" placeholder="账号"/>
+        </div>
+        <div class="form-item">
+            <input id="password" type="password" name="password" autocomplete="off" placeholder="登录密码"/>
+        </div>
+        <div class="form-item">
+            <input style="padding-left: 0px" type="submit" value="登录"></input>
+        </div>
+    </form>
     <div class="reg-bar">
         <a class="reg" href="javascript:void(0)">立即注册</a>
         <a class="forget" href="javascript:void(0)">忘记密码</a>
     </div>
 </div>
 
-<div id="dialog" title="注册" class="opacity1" hidden style="text-align: center;margin: 0 auto;width: 960px; border: 1px solid #d9d9d9">
+
+<div id="dialog" title="注册" class="opacity1" hidden
+     style="text-align: center;margin: 0 auto;width: 960px; border: 1px solid #d9d9d9">
     <form class="opacity1">
         <ul style="margin-top: 10px">
             <li>用户名：<input id="userNameText" type="text"></li>
@@ -217,4 +221,5 @@
 <script type="text/javascript" src="resource/js/tools/jquery-1.11.3.min.js"></script>
 <script type="text/javascript" src="resource/js/tools/jquery-ui.min.js"></script>
 <script type="text/javascript" src="resource/js/login.js"></script>
+
 </html>

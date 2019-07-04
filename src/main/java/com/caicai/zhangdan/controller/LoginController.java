@@ -6,17 +6,29 @@ import com.caicai.zhangdan.service.LoginService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.AuthorityUtils;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
 
 @Controller
-@RequestMapping("/user")
 public class LoginController {
 
     private Logger logger = LoggerFactory.getLogger(LoginController.class);
@@ -25,29 +37,40 @@ public class LoginController {
     private LoginService loginService;
 
     @RequestMapping("/login")
-    @ResponseBody
-    public Map<String, String> login(String userName, String passWord) {
+    public ModelAndView hello(Model model, HttpServletRequest request){
 
-        Map<String, String> map = new HashMap<>();
-        UserEntity user = new UserEntity();
-        user.setUserName(userName);
-        logger.info("登录查询--参数：{}", JSON.toJSONString(user));
-        UserEntity userEntity = loginService.queryUserByUser(user);
-        logger.info("登录查询--返回：{}", JSON.toJSONString(userEntity));
-
-        if (!ObjectUtils.isEmpty(userEntity)) {
-            if (passWord.equals(userEntity.getPassWord())) {
-                map.put("status", "1");
-            } else {
-                map.put("status", "0");
-                map.put("message", "账号或密码错误！");
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        if (authentication != null && !authentication.getName().equalsIgnoreCase("anonymousUser")) {
+            Set<String> roles = AuthorityUtils.authorityListToSet(authentication.getAuthorities());
+            //根据登录用户权限跳转默认页面
+            if (roles.contains("ROLE_1")) {
+                return new ModelAndView("home");
+            } else if (roles.contains("ROLE_USER")) {
+                return new ModelAndView("redirect:user");
+            } else if (roles.contains("ROLE_OHTER")) {
+                return new ModelAndView("redirect:main");
             }
-        } else {
-            map.put("status", "0");
-            map.put("message", "不存在该账号！");
         }
+        HttpSession session = request.getSession(false);
+        if (session != null) {
+            Object errMsg = session.getAttribute("errMsg");
+            if (errMsg != null) {
+                model.addAttribute("errMsg", errMsg);
+                session.removeAttribute("errMsg");
+            }
+        }
+        return new ModelAndView("login");
+    }
 
-        return map;
+    //为了session从获取用户信息,可以配置如下
+    public UserEntity getUser() {
+        UserEntity user = new UserEntity();
+        SecurityContext ctx = SecurityContextHolder.getContext();
+        Authentication auth = ctx.getAuthentication();
+        if (auth.getPrincipal() instanceof UserDetails) {
+            user = (UserEntity) auth.getPrincipal();
+        }
+        return user;
     }
 
     @RequestMapping("/signIn")

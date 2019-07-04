@@ -22,7 +22,7 @@ $(function () {
 
 function login() {
     $.ajax({
-        url: '/user/login',
+        url: '/login',
         data: {
             'userName': $('#username').val(),
             'passWord': $('#password').val()
@@ -48,7 +48,7 @@ function signIn() {
         email: $('#emailText').val()
     }
     $.ajax({
-        url: '/user/signIn',
+        url: '/signIn',
         data: {
             user: JSON.stringify(user)
         },
