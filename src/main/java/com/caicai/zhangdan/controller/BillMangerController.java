@@ -75,14 +75,17 @@ public class BillMangerController {
 
     @RequestMapping("/queryAll")
     @ResponseBody
-    public BillResponse queryAll(@RequestParam("lFlag") String billType, HttpServletRequest request) {
+    public BillResponse queryAll(@RequestParam("lFlag") String billType,
+                                 @RequestParam("pageSize")Integer pageSize,
+                                 @RequestParam("pageNum")Integer pageNum,
+                                 HttpServletRequest request) {
         Authentication authentication = this.getAuthentication(request);
         String userName = authentication.getName().trim();
 
         BillCommand billCommand = new BillCommand();
         billCommand.setBillType(Integer.valueOf(billType));
-        billCommand.setPageNum(1);
-        billCommand.setPageSize(10);
+        billCommand.setPageNum(pageNum);
+        billCommand.setPageSize(pageSize);
         billCommand.setUserName(userName);
 
         logger.info("根据用户名查询所有账单--参数：{}", JSON.toJSONString(billCommand));

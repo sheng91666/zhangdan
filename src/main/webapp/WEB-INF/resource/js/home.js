@@ -122,8 +122,8 @@ function queryAll(priceFlag) {
     $.ajax({
         url: '/queryAll',
         data: {
-            // pageSize: 0,
-            // pageNum: 10,
+            pageSize: 0,
+            pageNum: 10,
             lFlag: priceFlag
         },
         type: 'get',
@@ -157,8 +157,7 @@ function addShouZhang() {
         dateType: 'json',
         success: function (data) {
             if (data) {
-                var html = template('allZhangDanTpl', {list: data});
-                $('#allZhangDanHtml').html(html);
+                queryAll();
             }
         }
 

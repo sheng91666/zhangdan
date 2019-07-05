@@ -85,10 +85,10 @@
                 <tbody>
                 {{each list as value index}}
                 <tr style="font-size: 16px;">
-                    <td style="width: 50px"><input type="checkbox" data-id='{{value.id}}'></td>
+                    <td style="width: 50px"><input type="checkbox" data-id='{{value.billId}}'></td>
                     <td class="tableRowWidth">{{value.goodsName}}</td>
-                    <td class="tableRowWidth">{{value.money}}</td>
-                    <td class="tableRowWidth">{{value.createTime}}</td>
+                    <td class="tableRowWidth">{{value.price}}</td>
+                    <td class="tableRowWidth">{{value.billTime}}</td>
                     <td class="tableRowWidth">{{value.remark}}</td>
                 </tr>
                 {{/each}}

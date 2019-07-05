@@ -192,6 +192,7 @@
     <select id="queryAllByUser" parameterType="com.caicai.zhangdan.vo.BillCommand"
             resultType="com.caicai.zhangdan.vo.BillAndGoodsVo">
       SELECT
+          b.id as 'billId',
           b.bill_code AS 'billCode',
           b.goods_code AS 'goodsCode',
           b.goods_name AS 'goodsName',

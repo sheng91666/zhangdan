@@ -10,6 +10,8 @@ public class BillAndGoodsVo implements Serializable {
 
     private static final long serialVersionUID = 5195813181979585457L;
 
+    private Integer billId;
+
     private String billCode;
 
     private String goodsName;
