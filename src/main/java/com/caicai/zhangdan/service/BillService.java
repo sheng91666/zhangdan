@@ -11,4 +11,8 @@ public interface BillService {
 
     int saveZD(BillEntity billEntity);
 
+    int deleteBillById(Integer id);
+
+    PageInfo<BillAndGoodsVo> queryBySearch(String priceFlag,String startTime, String endTime);
+
 }

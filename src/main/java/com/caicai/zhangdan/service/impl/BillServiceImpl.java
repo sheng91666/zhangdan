@@ -21,7 +21,7 @@ public class BillServiceImpl implements BillService {
     @Override
     public PageInfo<BillAndGoodsVo> queryAllByUser(BillCommand command) {
 
-        PageHelper.startPage(command.getPageNum(),command.getPageSize());
+        PageHelper.startPage(command.getPageNum(), command.getPageSize());
         List<BillAndGoodsVo> list = billMapper.queryAllByUser(command);
         PageInfo<BillAndGoodsVo> pageInfo = new PageInfo<>();
         pageInfo.setList(list);
@@ -31,5 +31,19 @@ public class BillServiceImpl implements BillService {
     @Override
     public int saveZD(BillEntity billEntity) {
         return billMapper.insertSelective(billEntity);
+    }
+
+    @Override
+    public int deleteBillById(Integer id) {
+        return billMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public PageInfo<BillAndGoodsVo> queryBySearch(String priceFlag, String startTime, String endTime) {
+        PageHelper.startPage(0, 10);
+        List<BillAndGoodsVo> billAndGoodsVos = billMapper.queryBySearch(priceFlag, startTime, endTime);
+        PageInfo<BillAndGoodsVo> billAndGoodsVoPageInfo = new PageInfo<>();
+        billAndGoodsVoPageInfo.setList(billAndGoodsVos);
+        return billAndGoodsVoPageInfo;
     }
 }

@@ -76,8 +76,8 @@ public class BillMangerController {
     @RequestMapping("/queryAll")
     @ResponseBody
     public BillResponse queryAll(@RequestParam("lFlag") String billType,
-                                 @RequestParam("pageSize")Integer pageSize,
-                                 @RequestParam("pageNum")Integer pageNum,
+                                 @RequestParam("pageSize") Integer pageSize,
+                                 @RequestParam("pageNum") Integer pageNum,
                                  HttpServletRequest request) {
         Authentication authentication = this.getAuthentication(request);
         String userName = authentication.getName().trim();
@@ -115,4 +115,21 @@ public class BillMangerController {
     }
 
 
+    @RequestMapping("/deleteZD")
+    @ResponseBody
+    public int deleteBillByIds(@RequestParam("ids") Integer id) {
+        logger.info("删除账单--参数：{}", JSON.toJSONString(id));
+        return billService.deleteBillById(id);
+    }
+
+    @RequestMapping("/queryBySearch")
+    @ResponseBody
+    public BillResponse queryBySearch(@RequestParam("priceFlag") String priceFlag,
+                                      @RequestParam(value = "startTime" ,required = false) String startTime,
+                                      @RequestParam(value = "endTime" ,required = false) String endTime) {
+        PageInfo<BillAndGoodsVo> billAndGoodsVoPageInfo = billService.queryBySearch(priceFlag, startTime, endTime);
+        BillResponse response = new BillResponse();
+        response.setPageInfo(billAndGoodsVoPageInfo);
+        return response;
+    }
 }

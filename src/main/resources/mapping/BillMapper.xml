@@ -207,4 +207,23 @@
           AND b.bill_type = #{billType}
           AND b.delete_flag = 0
   </select>
+
+    <select id="queryBySearch" resultType="com.caicai.zhangdan.vo.BillAndGoodsVo">
+      SELECT
+          b.id as 'billId',
+          b.bill_code AS 'billCode',
+          b.goods_code AS 'goodsCode',
+          b.goods_name AS 'goodsName',
+          b.price AS 'price',
+          b.remark AS 'remark',
+          b.create_date AS 'createDate',
+          b.bill_time AS 'billTime'
+      FROM
+          t_bill b
+      where
+            b.delete_flag = 0
+            <if test="priceFlag != null">and b.bill_type = #{priceFlag}</if>
+            <if test="startTime != null and startTime != ''"> and DATE_FORMAT(b.bill_time,'%Y-%m-%d') &gt;= #{startTime}</if>
+            <if test="endTime != null and endTime != ''">and DATE_FORMAT(b.bill_time,'%Y-%m-%d') &lt;= #{endTime}</if>
+  </select>
 </mapper>

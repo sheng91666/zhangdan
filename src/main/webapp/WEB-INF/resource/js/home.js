@@ -85,8 +85,7 @@ function delShouZhang(ids) {
         url: '/deleteZD',
         traditional: true,
         data: {
-            ids: ids,
-            priceFlag: priceFlag
+            ids: ids
         },
         type: 'post',
         dateType: 'json',
@@ -110,7 +109,7 @@ function queryBySearch(priceFlag, startTime, endTime) {
         dateType: 'json',
         success: function (data) {
             if (data) {
-                var html = template('allZhangDanTpl', {list: data});
+                var html = template('allZhangDanTpl', {list: data.pageInfo.list});
                 $('#allZhangDanHtml').html(html);
             }
         }
@@ -140,6 +139,7 @@ function queryAll(priceFlag) {
 }
 
 function addShouZhang() {
+    var lFlag = $('input[name=leiFlag]').val();
     var data = {
         "price": $('#addPrice').val(),
         "goodsName": $('#addName').val(),
@@ -157,7 +157,7 @@ function addShouZhang() {
         dateType: 'json',
         success: function (data) {
             if (data) {
-                queryAll();
+                queryAll(lFlag);
             }
         }
 
