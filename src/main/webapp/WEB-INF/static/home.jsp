@@ -7,16 +7,14 @@
     <link href="resource/css/foundation-datepicker.css" rel="stylesheet" type="text/css">
     <link href="resource/css/jquery-ui.min.css" rel="stylesheet" type="text/css">
 
-    <%--<script src="resource/js/tools/require.js"></script>--%>
     <%--<script src="resource/js/tools/require.js" data-main="resource/js/requireConfig"></script>--%>
-
     <script type="text/javascript" src="resource/js/tools/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="resource/js/tools/jquery-ui.min.js"></script>
     <script type="text/javascript" src="resource/js/tools/foundation-datepicker.js"></script>
     <script type="text/javascript" src="resource/js/tools/foundation-datepicker.zh-CN.js"></script>
     <script type="text/javascript" src="resource/js/tools/arttemplate.js"></script>
 
-    <script type="text/javascript" src="resource/js/home1.js" charset="utf-8"></script>
+    <script type="text/javascript" src="resource/js/home.js" charset="utf-8"></script>
 
     <style type="text/css">
         .tableRowWidth {
@@ -59,7 +57,8 @@
             <span style="margin-left: 50px; cursor: pointer;" id="shouRu" data-value="1">收入</span>
             <div style="margin-left: 100px; display:inline ;font-size: 16px">
                 查询时间：
-                <input id="startTime" style="width: 90px;display:inline;cursor: pointer;" readonly="readonly" value=""> -
+                <input id="startTime" style="width: 90px;display:inline;cursor: pointer;" readonly="readonly" value="">
+                -
                 <input id="endTime" style="width: 90px;display:inline;cursor: pointer;" readonly="readonly" value="">
                 <input id="searchQuery" style="margin-left: 10px;font-size: 16px;cursor: pointer;" type="button" value="查询">
                 <input id="addShouZhang" style="margin-left: 5px;font-size: 16px;cursor: pointer;" type="button" value="新增">
@@ -104,7 +103,7 @@
 </div>
 
 <div id="dialog" title="新增" style="text-align: center;margin: 0 auto;width: 960px; border: 1px solid #d9d9d9">
-    <form action="1.jsp">
+    <form>
         <div>类型：
             <label><input type="radio" name="leiFlag" value="0" checked>支出</label>
             <label><input type="radio" name="leiFlag" value="1">收入</label>
@@ -117,11 +116,10 @@
         </ul>
         <div style="display:inline ;font-size: 16px">
             <input id="dSure" style="margin-left: 10px;font-size: 16px;cursor: pointer;" type="button" value="确定">
-            <input id="dClose"style="margin-left: 10px;font-size: 16px;cursor: pointer;" type="button" value="取消">
+            <input id="dClose" style="margin-left: 10px;font-size: 16px;cursor: pointer;" type="button" value="取消">
         </div>
     </form>
 </div>
 
-<script src="resource/js/tools/require.js" defer sync="true"></script>
 </body>
 </html>

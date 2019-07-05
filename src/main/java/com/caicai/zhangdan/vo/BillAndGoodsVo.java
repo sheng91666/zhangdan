@@ -16,6 +16,8 @@ public class BillAndGoodsVo implements Serializable {
 
     private String goodsCode;
 
+    private String billTime;
+
     private String billType;
 
     private BigDecimal price;

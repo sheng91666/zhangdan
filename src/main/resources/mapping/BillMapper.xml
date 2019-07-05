@@ -1,180 +1,209 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.caicai.zhangdan.mapper.BillMapper" >
-  <resultMap id="BaseResultMap" type="com.caicai.zhangdan.entity.BillEntity" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="bill_code" property="billCode" jdbcType="VARCHAR" />
-    <result column="goods_name" property="goodsName" jdbcType="VARCHAR" />
-    <result column="goods_code" property="goodsCode" jdbcType="VARCHAR" />
-    <result column="bill_type" property="billType" jdbcType="CHAR" />
-    <result column="price" property="price" jdbcType="DECIMAL" />
-    <result column="remark" property="remark" jdbcType="VARCHAR" />
-    <result column="delete_flag" property="deleteFlag" jdbcType="CHAR" />
-    <result column="create_date" property="createDate" jdbcType="TIMESTAMP" />
-    <result column="create_person" property="createPerson" jdbcType="VARCHAR" />
-    <result column="update_date" property="updateDate" jdbcType="TIMESTAMP" />
-    <result column="update_person" property="updatePerson" jdbcType="VARCHAR" />
-  </resultMap>
+<mapper namespace="com.caicai.zhangdan.mapper.BillMapper">
+    <resultMap id="BaseResultMap" type="com.caicai.zhangdan.entity.BillEntity">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="bill_code" property="billCode" jdbcType="VARCHAR"/>
+        <result column="goods_name" property="goodsName" jdbcType="VARCHAR"/>
+        <result column="goods_code" property="goodsCode" jdbcType="VARCHAR"/>
+        <result column="bill_time" property="billTime" jdbcType="VARCHAR"/>
+        <result column="bill_type" property="billType" jdbcType="CHAR"/>
+        <result column="price" property="price" jdbcType="DECIMAL"/>
+        <result column="remark" property="remark" jdbcType="VARCHAR"/>
+        <result column="delete_flag" property="deleteFlag" jdbcType="CHAR"/>
+        <result column="create_date" property="createDate" jdbcType="TIMESTAMP"/>
+        <result column="create_person" property="createPerson" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="TIMESTAMP"/>
+        <result column="update_person" property="updatePerson" jdbcType="VARCHAR"/>
+    </resultMap>
 
-  <sql id="Base_Column_List" >
-    id, bill_code, goods_name, goods_code, bill_type, price, remark, delete_flag, create_date, 
+    <sql id="Base_Column_List">
+    id, bill_code, goods_name, goods_code, bill_time,bill_type, price, remark, delete_flag, create_date,
     create_person, update_date, update_person
   </sql>
 
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from t_bill
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+        select
+        <include refid="Base_Column_List"/>
+        from t_bill
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from t_bill
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.caicai.zhangdan.entity.BillEntity" >
+    <insert id="insert" parameterType="com.caicai.zhangdan.entity.BillEntity">
     insert into t_bill (id, bill_code, goods_name, 
-      goods_code, bill_type, price, 
+      goods_code, bill_time,bill_type, price,
       remark, delete_flag, create_date, 
       create_person, update_date, update_person
       )
     values (#{id,jdbcType=INTEGER}, #{billCode,jdbcType=VARCHAR}, #{goodsName,jdbcType=VARCHAR}, 
-      #{goodsCode,jdbcType=VARCHAR}, #{billType,jdbcType=CHAR}, #{price,jdbcType=DECIMAL}, 
+      #{goodsCode,jdbcType=VARCHAR},  #{billTime}, #{billType,jdbcType=CHAR}, #{price,jdbcType=DECIMAL},
       #{remark,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=CHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{createPerson,jdbcType=VARCHAR}, #{updateDate,jdbcType=TIMESTAMP}, #{updatePerson,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.caicai.zhangdan.entity.BillEntity" >
-    insert into t_bill
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="billCode != null" >
-        bill_code,
-      </if>
-      <if test="goodsName != null" >
-        goods_name,
-      </if>
-      <if test="goodsCode != null" >
-        goods_code,
-      </if>
-      <if test="billType != null" >
-        bill_type,
-      </if>
-      <if test="price != null" >
-        price,
-      </if>
-      <if test="remark != null" >
-        remark,
-      </if>
-      <if test="deleteFlag != null" >
-        delete_flag,
-      </if>
-      <if test="createDate != null" >
-        create_date,
-      </if>
-      <if test="createPerson != null" >
-        create_person,
-      </if>
-      <if test="updateDate != null" >
-        update_date,
-      </if>
-      <if test="updatePerson != null" >
-        update_person,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="billCode != null" >
-        #{billCode,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsName != null" >
-        #{goodsName,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsCode != null" >
-        #{goodsCode,jdbcType=VARCHAR},
-      </if>
-      <if test="billType != null" >
-        #{billType,jdbcType=CHAR},
-      </if>
-      <if test="price != null" >
-        #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="remark != null" >
-        #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="deleteFlag != null" >
-        #{deleteFlag,jdbcType=CHAR},
-      </if>
-      <if test="createDate != null" >
-        #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createPerson != null" >
-        #{createPerson,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null" >
-        #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatePerson != null" >
-        #{updatePerson,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
+    <insert id="insertSelective" parameterType="com.caicai.zhangdan.entity.BillEntity">
+        insert into t_bill
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="billCode != null">
+                bill_code,
+            </if>
+            <if test="goodsName != null">
+                goods_name,
+            </if>
+            <if test="goodsCode != null">
+                goods_code,
+            </if>
+            <if test="billTime != null">
+                bill_time,
+            </if>
+            <if test="billType != null">
+                bill_type,
+            </if>
+            <if test="price != null">
+                price,
+            </if>
+            <if test="remark != null">
+                remark,
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag,
+            </if>
+            <if test="createDate != null">
+                create_date,
+            </if>
+            <if test="createPerson != null">
+                create_person,
+            </if>
+            <if test="updateDate != null">
+                update_date,
+            </if>
+            <if test="updatePerson != null">
+                update_person,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="billCode != null">
+                #{billCode},
+            </if>
+            <if test="goodsName != null">
+                #{goodsName},
+            </if>
+            <if test="goodsCode != null">
+                #{goodsCode},
+            </if>
+            <if test="billTime != null">
+                #{billTime},
+            </if>
+            <if test="billType != null">
+                #{billType},
+            </if>
+            <if test="price != null">
+                #{price},
+            </if>
+            <if test="remark != null">
+                #{remark},
+            </if>
+            <if test="deleteFlag != null">
+                #{deleteFlag},
+            </if>
+            <if test="createDate != null">
+                #{createDate},
+            </if>
+            <if test="createPerson != null">
+                #{createPerson},
+            </if>
+            <if test="updateDate != null">
+                #{updateDate},
+            </if>
+            <if test="updatePerson != null">
+                #{updatePerson},
+            </if>
+        </trim>
+    </insert>
 
-  <update id="updateByPrimaryKeySelective" parameterType="com.caicai.zhangdan.entity.BillEntity" >
+    <update id="updateByPrimaryKeySelective" parameterType="com.caicai.zhangdan.entity.BillEntity">
+        update t_bill
+        <set>
+            <if test="billCode != null">
+                bill_code = #{billCode},
+            </if>
+            <if test="goodsName != null">
+                goods_name = #{goodsName},
+            </if>
+            <if test="goodsCode != null">
+                goods_code = #{goodsCode},
+            </if>
+            <if test="billTime != null">
+                bill_Time = #{billTime},
+            </if>
+            <if test="billType != null">
+                bill_type = #{billType},
+            </if>
+            <if test="price != null">
+                price = #{price},
+            </if>
+            <if test="remark != null">
+                remark = #{remark},
+            </if>
+            <if test="deleteFlag != null">
+                delete_flag = #{deleteFlag},
+            </if>
+            <if test="createDate != null">
+                create_date = #{createDate},
+            </if>
+            <if test="createPerson != null">
+                create_person = #{createPerson},
+            </if>
+            <if test="updateDate != null">
+                update_date = #{updateDate},
+            </if>
+            <if test="updatePerson != null">
+                update_person = #{updatePerson},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.caicai.zhangdan.entity.BillEntity">
     update t_bill
-    <set >
-      <if test="billCode != null" >
-        bill_code = #{billCode,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsName != null" >
-        goods_name = #{goodsName,jdbcType=VARCHAR},
-      </if>
-      <if test="goodsCode != null" >
-        goods_code = #{goodsCode,jdbcType=VARCHAR},
-      </if>
-      <if test="billType != null" >
-        bill_type = #{billType,jdbcType=CHAR},
-      </if>
-      <if test="price != null" >
-        price = #{price,jdbcType=DECIMAL},
-      </if>
-      <if test="remark != null" >
-        remark = #{remark,jdbcType=VARCHAR},
-      </if>
-      <if test="deleteFlag != null" >
-        delete_flag = #{deleteFlag,jdbcType=CHAR},
-      </if>
-      <if test="createDate != null" >
-        create_date = #{createDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="createPerson != null" >
-        create_person = #{createPerson,jdbcType=VARCHAR},
-      </if>
-      <if test="updateDate != null" >
-        update_date = #{updateDate,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updatePerson != null" >
-        update_person = #{updatePerson,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
+    set bill_code = #{billCode},
+      goods_name = #{goodsName},
+      goods_code = #{goodsCode},
+      bill_type = #{billType},
+      bill_time = #{billTime},
+      price = #{price},
+      remark = #{remark},
+      delete_flag = #{deleteFlag},
+      create_date = #{createDate},
+      create_person = #{createPerson},
+      update_date = #{updateDate},
+      update_person = #{updatePerson}
+    where id = #{id}
   </update>
-  <update id="updateByPrimaryKey" parameterType="com.caicai.zhangdan.entity.BillEntity" >
-    update t_bill
-    set bill_code = #{billCode,jdbcType=VARCHAR},
-      goods_name = #{goodsName,jdbcType=VARCHAR},
-      goods_code = #{goodsCode,jdbcType=VARCHAR},
-      bill_type = #{billType,jdbcType=CHAR},
-      price = #{price,jdbcType=DECIMAL},
-      remark = #{remark,jdbcType=VARCHAR},
-      delete_flag = #{deleteFlag,jdbcType=CHAR},
-      create_date = #{createDate,jdbcType=TIMESTAMP},
-      create_person = #{createPerson,jdbcType=VARCHAR},
-      update_date = #{updateDate,jdbcType=TIMESTAMP},
-      update_person = #{updatePerson,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+
+    <select id="queryAllByUser" parameterType="com.caicai.zhangdan.vo.BillCommand"
+            resultType="com.caicai.zhangdan.vo.BillAndGoodsVo">
+      SELECT
+          b.bill_code AS 'billCode',
+          b.goods_code AS 'goodsCode',
+          b.goods_name AS 'goodsName',
+          b.price AS 'price',
+          b.remark AS 'remark',
+          b.create_date AS 'createDate',
+          b.bill_time AS 'billTime'
+      FROM
+          t_bill b
+      WHERE
+              b.create_person = #{userName}
+          AND b.bill_type = #{billType}
+          AND b.delete_flag = 0
+  </select>
 </mapper>

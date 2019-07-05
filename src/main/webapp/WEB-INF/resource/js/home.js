@@ -4,7 +4,7 @@ var priceFlag = 0, startTime = '', endTime = '';
 $(function () {
     queryAll(priceFlag);
 
-    $("#shouRu").click(function (){
+    $("#shouRu").click(function () {
         priceFlag = $('#shouRu').attr('data-value');
         queryAll(priceFlag);
         $("#shouRu").addClass('leixing');
@@ -36,8 +36,9 @@ $(function () {
     });
     $("#addShouZhang").click(function () {
         $('#addTime').fdatepicker({format: 'yyyy-mm-dd', pickTime: false});
-        $( "#dialog" ).dialog( "open" );
+        $("#dialog").dialog("open");
         $("#dSure").click(function () {
+            addShouZhang();
             thisDialog.dialog("close");
         });
         $("#dClose").click(function () {
@@ -56,26 +57,24 @@ $(function () {
     });
 
 
-
-
     $('#startTime').fdatepicker({format: 'yyyy-mm-dd', pickTime: false});
     $('#endTime').fdatepicker({format: 'yyyy-mm-dd', pickTime: false});
 
     //鼠标事件
     $('#shouRu').hover(function () {
-        if(!$('#shouRu').hasClass('leixing')){
-            $('#shouRu').css('color','#ca963b');
+        if (!$('#shouRu').hasClass('leixing')) {
+            $('#shouRu').css('color', '#ca963b');
         }
-    },function () {
-        $('#shouRu').css('color','');
+    }, function () {
+        $('#shouRu').css('color', '');
     });
 
     $('#zhiChu').hover(function () {
-        if(!$('#zhiChu').hasClass('leixing')){
-            $('#zhiChu').css('color','#ca963b');
+        if (!$('#zhiChu').hasClass('leixing')) {
+            $('#zhiChu').css('color', '#ca963b');
         }
-    },function () {
-        $('#zhiChu').css('color','');
+    }, function () {
+        $('#zhiChu').css('color', '');
     });
 
 });
@@ -123,15 +122,16 @@ function queryAll(priceFlag) {
     $.ajax({
         url: '/queryAll',
         data: {
-            pageSize: 0,
-            pageNum: 10,
+            // pageSize: 0,
+            // pageNum: 10,
             lFlag: priceFlag
         },
         type: 'get',
         dateType: 'JSON',
         success: function (data) {
             if (data) {
-                var html = template('allZhangDanTpl', {list: data});
+                var dataList = data.pageInfo.list;
+                var html = template('allZhangDanTpl', {list: dataList});
                 $('#allZhangDanHtml').html(html);
             }
         }
@@ -140,15 +140,18 @@ function queryAll(priceFlag) {
 }
 
 function addShouZhang() {
-    var val = $('leiFlag').val();
+    var data = {
+        "price": $('#addPrice').val(),
+        "goodsName": $('#addName').val(),
+        "billType": $('input[name=leiFlag]').val(),
+        "billTime": $('#addTime').val(),
+        "remark": $('#addMark').val()
+    }
+
     $.ajax({
         url: '/saveZD',
         data: {
-            money: $('#addPrice').val(),
-            goodsName: $('#addName').val(),
-            priceFlag: $('leiFlag').val(),
-            createTime: $('#addTime').val(),
-            remark:$('#addMark').val()
+            data: JSON.stringify(data)
         },
         type: 'post',
         dateType: 'json',

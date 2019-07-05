@@ -1,6 +1,10 @@
 package com.caicai.zhangdan.mapper;
 
 import com.caicai.zhangdan.entity.BillEntity;
+import com.caicai.zhangdan.vo.BillAndGoodsVo;
+import com.caicai.zhangdan.vo.BillCommand;
+
+import java.util.List;
 
 public interface BillMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +18,6 @@ public interface BillMapper {
     int updateByPrimaryKeySelective(BillEntity record);
 
     int updateByPrimaryKey(BillEntity record);
+
+    List<BillAndGoodsVo> queryAllByUser(BillCommand command);
 }
